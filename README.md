@@ -1,16 +1,28 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+This project uses [Bun](https://bun.sh) as the package manager instead of npm/yarn/pnpm.
+
+## Prerequisites
+
+Install Bun first (Windows PowerShell):
+
+```powershell
+powershell -c "irm bun.sh/install.ps1|iex"
+```
+
+Restart your PowerShell session after installation so the `bun` command is available on your PATH.
+
 ## Getting Started
 
-First, run the development server:
+First, install dependencies:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
+bun install
+```
+
+Then, run the development server:
+
+```bash
 bun dev
 ```
 
