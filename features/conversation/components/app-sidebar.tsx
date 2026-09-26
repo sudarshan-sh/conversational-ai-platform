@@ -63,22 +63,27 @@ export function AppSidebar() {
 
   return (
     <Sidebar collapsible="icon" variant="inset">
-      <SidebarHeader className="gap-2">
+      <SidebarHeader className="gap-2 border-b border-sidebar-border/60 pb-3">
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton
               size="lg"
               className="font-semibold tracking-tight"
+              tooltip="Conversational AI Platform"
               render={<Link href="/" />}
             >
-              <span className="flex size-8 items-center justify-center rounded-lg bg-primary text-sm text-primary-foreground">
+              <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-primary text-sm text-primary-foreground">
                 C
               </span>
-              <span>ChaiGPT</span>
+              <span className="truncate">Conversational AI Platform</span>
             </SidebarMenuButton>
           </SidebarMenuItem>
           <SidebarMenuItem>
-            <SidebarMenuButton tooltip="New chat" render={<Link href="/" />}>
+            <SidebarMenuButton
+              tooltip="New chat"
+              render={<Link href="/" />}
+              className="border border-sidebar-border/60 bg-sidebar-accent/40 font-medium hover:bg-sidebar-accent"
+            >
               <PlusIcon />
               <span>New chat</span>
             </SidebarMenuButton>
@@ -88,7 +93,9 @@ export function AppSidebar() {
 
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Chats</SidebarGroupLabel>
+          <SidebarGroupLabel className="text-xs font-medium tracking-wide text-sidebar-foreground/60 uppercase">
+            Chats
+          </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               <ChatList
@@ -101,7 +108,7 @@ export function AppSidebar() {
         </SidebarGroup>
       </SidebarContent>
 
-      <SidebarFooter>
+      <SidebarFooter className="border-t border-sidebar-border/60 pt-2">
         <SidebarFooterMenu />
       </SidebarFooter>
       <SidebarRail />
@@ -234,14 +241,14 @@ function SidebarFooterMenu() {
           type="button"
           variant="ghost"
           size="sm"
-          className="w-full justify-start"
+          className="w-full justify-start rounded-md text-sidebar-foreground/80 hover:bg-sidebar-accent hover:text-sidebar-foreground"
           onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
         >
           Toggle theme
         </Button>
       </SidebarMenuItem>
       <SidebarMenuItem>
-        <div className="flex items-center gap-2 px-1 py-1.5">
+        <div className="flex items-center gap-2 rounded-md px-1 py-1.5 hover:bg-sidebar-accent/60">
           <UserButton
             appearance={{
               elements: {

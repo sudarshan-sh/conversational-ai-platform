@@ -26,7 +26,7 @@ type ChatComposerProps = {
 export function ChatComposer({
   onSend,
   isSending = false,
-  placeholder = "Message ChaiGPT…",
+  placeholder = "Message Conversational AI Platform…",
   className,
   autoFocus = false,
 }: ChatComposerProps) {
@@ -63,9 +63,12 @@ export function ChatComposer({
   return (
     <form
       onSubmit={(event) => void handleSubmit(event)}
-      className={cn("mx-auto w-full max-w-3xl px-4 pb-4 md:px-6", className)}
+      className={cn(
+        "mx-auto w-full max-w-3xl shrink-0 px-4 pb-4 md:px-6",
+        className,
+      )}
     >
-      <InputGroup className="h-auto min-h-14 rounded-3xl border-border/80 bg-background shadow-sm dark:bg-input/40">
+      <InputGroup className="h-auto min-h-14 rounded-3xl border-border/80 bg-background shadow-sm transition-shadow focus-within:border-ring/50 focus-within:ring-2 focus-within:ring-ring/20 dark:bg-input/40">
         <InputGroupTextarea
           ref={textareaRef}
           value={value}
@@ -90,7 +93,7 @@ export function ChatComposer({
         </InputGroupAddon>
       </InputGroup>
       <p className="mt-2 text-center text-xs text-muted-foreground">
-        ChaiGPT can make mistakes. Check important info.
+        This AI Platform can make mistakes. Check important info.
       </p>
     </form>
   );
