@@ -3,17 +3,19 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
+  MonitorIcon,
+  MoonIcon,
   MoreHorizontalIcon,
   PencilIcon,
   PinIcon,
   PinOffIcon,
   PlusIcon,
+  SunIcon,
   Trash2Icon,
 } from "lucide-react";
 import { UserButton } from "@clerk/nextjs";
 import { useTheme } from "next-themes";
 
-import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -127,11 +129,12 @@ function ChatList({
   activeId: string | undefined;
 }) {
   if (isLoading) {
+    const widths = ["w-full", "w-5/6", "w-full", "w-2/3", "w-4/5"];
     return (
       <>
-        {Array.from({ length: 5 }).map((_, index) => (
-          <SidebarMenuItem key={index}>
-            <Skeleton className="h-8 w-full" />
+        {widths.map((width, index) => (
+          <SidebarMenuItem key={index} className="mb-1 last:mb-0">
+            <Skeleton className={cn("h-8 rounded-md", width)} />
           </SidebarMenuItem>
         ))}
       </>
@@ -237,15 +240,19 @@ function SidebarFooterMenu() {
   return (
     <SidebarMenu>
       <SidebarMenuItem>
-        <Button
-          type="button"
-          variant="ghost"
-          size="sm"
-          className="w-full justify-start rounded-md text-sidebar-foreground/80 hover:bg-sidebar-accent hover:text-sidebar-foreground"
+        <SidebarMenuButton
+          tooltip="Toggle theme"
           onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
         >
-          Toggle theme
-        </Button>
+          {resolvedTheme === "dark" ? (
+            <MoonIcon />
+          ) : resolvedTheme === "light" ? (
+            <SunIcon />
+          ) : (
+            <MonitorIcon />
+          )}
+          <span>Toggle theme</span>
+        </SidebarMenuButton>
       </SidebarMenuItem>
       <SidebarMenuItem>
         <div className="flex items-center gap-2 rounded-md px-1 py-1.5 hover:bg-sidebar-accent/60">
