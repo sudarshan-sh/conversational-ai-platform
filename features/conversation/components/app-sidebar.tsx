@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
-  MonitorIcon,
   MoonIcon,
   MoreHorizontalIcon,
   PencilIcon,
@@ -233,39 +232,48 @@ function ChatItem({
   );
 }
 
-/** Footer menu with theme toggle and Clerk user account button. */
+/**
+ * Footer account button — Clerk's `UserButton` (keeps "Manage account", security,
+ * sessions, etc. built in) with the full name shown and a custom "Toggle theme"
+ * action merged into its menu via `UserButton.MenuItems`.
+ */
 function SidebarFooterMenu() {
   const { resolvedTheme, setTheme } = useTheme();
 
   return (
     <SidebarMenu>
       <SidebarMenuItem>
-        <SidebarMenuButton
-          tooltip="Toggle theme"
-          onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
-        >
-          {resolvedTheme === "dark" ? (
-            <MoonIcon />
-          ) : resolvedTheme === "light" ? (
-            <SunIcon />
-          ) : (
-            <MonitorIcon />
-          )}
-          <span>Toggle theme</span>
-        </SidebarMenuButton>
-      </SidebarMenuItem>
-      <SidebarMenuItem>
-        <div className="flex items-center gap-2 rounded-md px-1 py-1.5 hover:bg-sidebar-accent/60">
+        <div className="flex items-center rounded-md px-1 py-1 hover:bg-sidebar-accent/60">
           <UserButton
+            showName
             appearance={{
               elements: {
+                rootBox: "w-full",
+                userButtonTrigger:
+                  "w-full flex items-center gap-2 rounded-md focus:shadow-none",
+                userButtonBox: "w-full flex-row-reverse gap-2",
+                userButtonOuterIdentifier:
+                  "truncate text-sm text-sidebar-foreground group-data-[collapsible=icon]:hidden",
                 avatarBox: "size-8",
               },
             }}
-          />
-          <span className="truncate text-sm text-muted-foreground group-data-[collapsible=icon]:hidden">
-            Account
-          </span>
+          >
+            <UserButton.MenuItems>
+              <UserButton.Action
+                label={resolvedTheme === "dark" ? "Light mode" : "Dark mode"}
+                labelIcon={
+                  resolvedTheme === "dark" ? (
+                    <SunIcon className="size-4" />
+                  ) : (
+                    <MoonIcon className="size-4" />
+                  )
+                }
+                onClick={() =>
+                  setTheme(resolvedTheme === "dark" ? "light" : "dark")
+                }
+              />
+            </UserButton.MenuItems>
+          </UserButton>
         </div>
       </SidebarMenuItem>
     </SidebarMenu>

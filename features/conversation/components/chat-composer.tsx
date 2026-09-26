@@ -26,7 +26,7 @@ type ChatComposerProps = {
 export function ChatComposer({
   onSend,
   isSending = false,
-  placeholder = "Message Conversational AI Platform…",
+  placeholder = "Ask me anything...",
   className,
   autoFocus = false,
 }: ChatComposerProps) {
